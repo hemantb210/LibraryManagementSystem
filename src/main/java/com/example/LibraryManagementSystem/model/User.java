@@ -1,6 +1,7 @@
 package com.example.LibraryManagementSystem.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.Set;
 
 @Entity
@@ -20,6 +21,7 @@ public class User {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<IssuedBook> books;
+    @NotEmpty(message = "User Name cannot be empty")
     private String name;
     private String email;
 
