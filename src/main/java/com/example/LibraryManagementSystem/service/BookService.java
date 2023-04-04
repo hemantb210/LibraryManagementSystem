@@ -26,7 +26,7 @@ public class BookService {
     public void updateABook(Book book){
         Book b =bookRepository.findByName(book.getName());
         if(b==null){
-            throw new BookNotFoundException(book.getId());
+            throw new BookNotFoundException(book.getBookId());
         }
 //        b.setName(book.getName());
         b.setAuthorName(book.getAuthorName());

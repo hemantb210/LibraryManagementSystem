@@ -1,5 +1,8 @@
 package com.example.LibraryManagementSystem.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.util.Set;
@@ -13,14 +16,22 @@ public class User {
 
     public User(int id, Set<IssuedBook> books, String name, String email) {
         this.id = id;
-        this.books = books;
+        this.issuedBookSet = books;
         this.name = name;
         this.email = email;
     }
 
+    public Set<IssuedBook> getIssuedBookSet() {
+        return issuedBookSet;
+    }
+
+    public void setIssuedBookSet(Set<IssuedBook> issuedBookSet) {
+        this.issuedBookSet = issuedBookSet;
+    }
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private Set<IssuedBook> books;
+    @JsonIgnore
+    private Set<IssuedBook> issuedBookSet;
     @NotEmpty(message = "User Name cannot be empty")
     private String name;
     private String email;

@@ -1,6 +1,7 @@
 package com.example.LibraryManagementSystem.controllers;
 
 import com.example.LibraryManagementSystem.model.Book;
+import com.example.LibraryManagementSystem.model.IssuedBook;
 import com.example.LibraryManagementSystem.model.User;
 import com.example.LibraryManagementSystem.service.BookService;
 import com.example.LibraryManagementSystem.service.UserService;
@@ -8,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
+
 @RestController
 public class UserController {
     @Autowired
@@ -16,6 +19,13 @@ public class UserController {
     public User findById(@RequestParam(value ="id") int id){
         return userService.findById(id);
     }
+
+    @GetMapping("/issuedBooksByUser/{userId}")
+    public Set<IssuedBook> issuedBooksByUser(@PathVariable int userId){
+        return userService.issuedBooksByUser(userId);
+
+    }
+
 
     @GetMapping("/allUsers")
     public List<User> findAll(){

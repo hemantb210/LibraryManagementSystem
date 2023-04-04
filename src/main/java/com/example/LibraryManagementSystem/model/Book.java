@@ -1,5 +1,8 @@
 package com.example.LibraryManagementSystem.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -9,18 +12,11 @@ import java.util.Set;
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
+    private int bookId;
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
     private Set<IssuedBook> books;
     @NotEmpty(message = "Book Name cannot be empty")
     private String name;
-
-    public Book(String name, String authorName, int cost) {
-        this.name = name;
-        this.authorName = authorName;
-        this.cost = cost;
-    }
     @NotEmpty(message = "Book AuthorName cannot be empty")
     private String authorName;
     @NotNull(message = "Book cost cannot be empty")
@@ -28,24 +24,21 @@ public class Book {
     @NotNull(message = "NumberOfBooks cannot be empty")
     private int numberOfBooks;
 
-    @Override
-    public String toString() {
-        return "Book{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", authorName='" + authorName + '\'' +
-                ", cost=" + cost +
-                ", numberOfBooks=" + numberOfBooks +
-                '}';
+    public int getBookId() {
+        return bookId;
     }
 
-    public int getId() {
-        return id;
+    public void setBookId(int bookId) {
+        this.bookId = bookId;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+//    public Set<IssuedBook> getBooks() {
+//        return books;
+//    }
+//
+//    public void setBooks(Set<IssuedBook> books) {
+//        this.books = books;
+//    }
 
     public String getName() {
         return name;
@@ -87,6 +80,11 @@ public class Book {
         this.authorName = authorName;
         this.cost = cost;
         this.numberOfBooks = numberOfBooks;
+    }
+    public Book(String name, String authorName, int cost) {
+        this.name = name;
+        this.authorName = authorName;
+        this.cost = cost;
     }
 
 }

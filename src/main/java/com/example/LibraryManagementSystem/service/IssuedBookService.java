@@ -32,7 +32,7 @@ public class IssuedBookService {
     public void issueBook(int userId, int bookId){
         long millis=System.currentTimeMillis();
         Book bb = bookService.findById(bookId);
-        IssuedBook b =  new IssuedBook(bookId,userId, bb.getName(), new Date(millis));
+        IssuedBook b =  new IssuedBook(bookId,userId, new Date(millis));
         issuedBookRepository.save(b);
         bookService.updateNumberOfBooks(bookId,-1);
 
@@ -70,5 +70,12 @@ public class IssuedBookService {
 
 
     }
+
+    public int fineForUser( int uId,  int bId){
+        return issuedBookRepository.fineForUser(uId, bId);
+
+
+    }
+
 
 }
