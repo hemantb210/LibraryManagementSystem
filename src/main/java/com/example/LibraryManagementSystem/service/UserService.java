@@ -1,5 +1,6 @@
 package com.example.LibraryManagementSystem.service;
 
+import com.example.LibraryManagementSystem.dto.UserDTO;
 import com.example.LibraryManagementSystem.exception.UserNotFoundException;
 import com.example.LibraryManagementSystem.exception.WrongEmailAddressException;
 import com.example.LibraryManagementSystem.model.IssuedBook;
@@ -22,7 +23,8 @@ public class UserService {
     public List<User> findAll(){
         return userRepository.findAll();
     }
-    public void insertAUser(User user){
+    public void insertAUser(UserDTO userDTO){
+        User user = new User(userDTO.getIssuedBookSet(), userDTO.getName(), userDTO.getEmail());
         if(UserValidator.isUserEmailValid(user.getEmail()) ){userRepository.save(user);}
         else {throw new WrongEmailAddressException();
         }

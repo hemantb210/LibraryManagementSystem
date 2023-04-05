@@ -1,6 +1,7 @@
 package com.example.LibraryManagementSystem.controllers;
 
 
+import com.example.LibraryManagementSystem.dto.BookDTO;
 import com.example.LibraryManagementSystem.model.Book;
 import com.example.LibraryManagementSystem.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +25,8 @@ import java.util.List;
             return bookService.findAll();
         }
         @PostMapping("/insertABook")
-    public void insertABook(@RequestBody Book book) {
-            bookService.insertABook(book);
+    public void insertABook(@RequestBody BookDTO bookDTO) {
+            bookService.insertABook(bookDTO);
 
     }
     @DeleteMapping("/deleteById/{id}")

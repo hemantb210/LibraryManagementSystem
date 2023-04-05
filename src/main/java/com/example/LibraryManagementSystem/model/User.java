@@ -13,27 +13,12 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
-    public User(int id, Set<IssuedBook> books, String name, String email) {
-        this.id = id;
-        this.issuedBookSet = books;
-        this.name = name;
-        this.email = email;
-    }
-
-    public Set<IssuedBook> getIssuedBookSet() {
-        return issuedBookSet;
-    }
-
-    public void setIssuedBookSet(Set<IssuedBook> issuedBookSet) {
-        this.issuedBookSet = issuedBookSet;
-    }
-
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonIgnore
     private Set<IssuedBook> issuedBookSet;
     @NotEmpty(message = "User Name cannot be empty")
     private String name;
+    @NotEmpty(message = "User Name cannot be empty")
     private String email;
 
     public int getId() {
@@ -60,11 +45,24 @@ public class User {
         this.email = email;
     }
 
+    public Set<IssuedBook> getIssuedBookSet() {
+        return issuedBookSet;
+    }
+
+    public void setIssuedBookSet(Set<IssuedBook> issuedBookSet) {
+        this.issuedBookSet = issuedBookSet;
+    }
+
     public User() {
     }
 
     public User(int id, String name, String email) {
         this.id = id;
+        this.name = name;
+        this.email = email;
+    }
+    public User(Set<IssuedBook> books, String name, String email) {
+        this.issuedBookSet = books;
         this.name = name;
         this.email = email;
     }

@@ -1,5 +1,6 @@
 package com.example.LibraryManagementSystem.service;
 
+import com.example.LibraryManagementSystem.dto.BookDTO;
 import com.example.LibraryManagementSystem.exception.BookNotFoundException;
 import com.example.LibraryManagementSystem.model.Book;
 import com.example.LibraryManagementSystem.repositories.BookRepository;
@@ -17,7 +18,8 @@ public class BookService {
     public  List<Book> findAll(){
         return bookRepository.findAll();
     }
-    public void insertABook(Book book){
+    public void insertABook(BookDTO bookDTO){
+        Book book = new  Book(bookDTO.getName(), bookDTO.getAuthorName(), bookDTO.getCost(), bookDTO.getNumberOfBooks());
         bookRepository.save(book);
     }
     public void deleteABookById(int id){

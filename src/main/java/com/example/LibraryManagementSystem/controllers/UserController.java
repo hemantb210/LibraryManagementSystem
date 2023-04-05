@@ -1,5 +1,6 @@
 package com.example.LibraryManagementSystem.controllers;
 
+import com.example.LibraryManagementSystem.dto.UserDTO;
 import com.example.LibraryManagementSystem.model.Book;
 import com.example.LibraryManagementSystem.model.IssuedBook;
 import com.example.LibraryManagementSystem.model.User;
@@ -32,8 +33,8 @@ public class UserController {
         return userService.findAll();
     }
     @PostMapping("/insertAUser")
-    public void insertAUser(@RequestBody User user) {
-        userService.insertAUser(user);
+    public void insertAUser(@RequestBody UserDTO userDTO) {
+        userService.insertAUser(userDTO);
 
     }
     @DeleteMapping("/deleteUserById/{id}")
