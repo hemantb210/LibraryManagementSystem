@@ -2,10 +2,9 @@ package com.example.LibraryManagementSystem.dto;
 
 import com.example.LibraryManagementSystem.model.IssuedBook;
 
-import javax.validation.constraints.NotEmpty;
 import java.util.Set;
 
-public class UserDTO {
+public class BorrowerDTO {
 
     private Set<IssuedBook> issuedBookSet;
     private String name;

@@ -1,5 +1,6 @@
 package com.example.LibraryManagementSystem.service;
 
+import com.example.LibraryManagementSystem.exception.BookNotFoundException;
 import com.example.LibraryManagementSystem.model.Book;
 import com.example.LibraryManagementSystem.model.IssuedBook;
 import com.example.LibraryManagementSystem.repositories.IssuedBookRepository;
@@ -29,17 +30,21 @@ public class IssuedBookService {
     }
     public IssuedBook findById(int id ){return issuedBookRepository.findById(id).get(); }
 
-    public void issueBook(int userId, int bookId){
+    public void issueBook(int borrowerId, int bookId){
         long millis=System.currentTimeMillis();
         Book bb = bookService.findById(bookId);
-        IssuedBook b =  new IssuedBook(bookId,userId, new Date(millis));
+        if(bb.getNumberOfBooks()>0){
+        IssuedBook b =  new IssuedBook(bookId,borrowerId, new Date(millis));
         issuedBookRepository.save(b);
-        bookService.updateNumberOfBooks(bookId,-1);
+        bookService.updateNumberOfBooks(bookId,-1);}
+        else {
+            throw new BookNotFoundException("This book is no longer available");
+        }
 
 
 
     }
-    public void returnBook(int userId, int bookId)  {
+    public void returnBook(int borrowerId, int bookId)  {
         long millis=System.currentTimeMillis();
 
         IssuedBook b = issuedBookRepository.findById(bookId).get();
@@ -71,7 +76,7 @@ public class IssuedBookService {
 
     }
 
-    public int fineForUser( int uId,  int bId){
+    public int fineForBorrower( int uId,  int bId){
         return issuedBookRepository.fineForUser(uId, bId);
 
 

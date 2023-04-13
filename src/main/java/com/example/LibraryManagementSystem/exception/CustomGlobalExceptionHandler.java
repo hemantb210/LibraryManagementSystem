@@ -10,7 +10,7 @@ import java.io.IOException;
 
 @ControllerAdvice
 public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler {
-@ExceptionHandler(UserNotFoundException.class)
+@ExceptionHandler(BorrowerNotFoundException.class)
     public void springHandleUserNotFound(HttpServletResponse response) throws IOException {  response.sendError(HttpStatus.NOT_FOUND.value());}
     @ExceptionHandler(BookNotFoundException.class)
     public void springHandleBookNotFound(HttpServletResponse response) throws IOException {  response.sendError(HttpStatus.NOT_FOUND.value());}

@@ -1,6 +1,5 @@
 package com.example.LibraryManagementSystem.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -9,16 +8,16 @@ import java.util.Set;
 
 @Entity
 
-public class User {
+public class Borrower {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "borrower", cascade = CascadeType.ALL)
     @JsonIgnore
     private Set<IssuedBook> issuedBookSet;
-    @NotEmpty(message = "User Name cannot be empty")
+    @NotEmpty(message = "Borrower Name cannot be empty")
     private String name;
-    @NotEmpty(message = "User Name cannot be empty")
+    @NotEmpty(message = "Borrower Email cannot be empty")
     private String email;
 
     public int getId() {
@@ -53,15 +52,15 @@ public class User {
         this.issuedBookSet = issuedBookSet;
     }
 
-    public User() {
+    public Borrower() {
     }
 
-    public User(int id, String name, String email) {
+    public Borrower(int id, String name, String email) {
         this.id = id;
         this.name = name;
         this.email = email;
     }
-    public User(Set<IssuedBook> books, String name, String email) {
+    public Borrower(Set<IssuedBook> books, String name, String email) {
         this.issuedBookSet = books;
         this.name = name;
         this.email = email;

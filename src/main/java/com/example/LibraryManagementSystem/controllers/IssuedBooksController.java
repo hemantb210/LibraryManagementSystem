@@ -19,9 +19,6 @@ public class IssuedBooksController  {
     public List<IssuedBook> allIssuedBooks(){
         return issuedBookService.allIssuedBooks();
     }
-
-
-
     @PostMapping("/issueBook/{uId}/{bId}")
     public void issueABook(@PathVariable int uId, @PathVariable int bId){
         issuedBookService.issueBook(uId, bId);
@@ -30,10 +27,9 @@ public class IssuedBooksController  {
     public void returnABook(@PathVariable int uId, @PathVariable int bId){
         issuedBookService.returnBook(uId,bId);
     }
-
-    @GetMapping("/fineForUser/{uId}/{bId}")
-    public int fineForUser(@PathVariable int uId, @PathVariable int bId){
-        return issuedBookService.fineForUser(uId, bId);
+    @GetMapping("/fineForBorrower/{uId}/{bId}")
+    public int fineForBorrower(@PathVariable int uId, @PathVariable int bId){
+        return issuedBookService.fineForBorrower(uId, bId);
     }
 
 

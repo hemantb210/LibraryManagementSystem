@@ -1,8 +1,5 @@
 package com.example.LibraryManagementSystem.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import javax.persistence.*;
 import java.util.Date;
 
@@ -12,8 +9,8 @@ public class IssuedBook{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int IssuedBookNumber;
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "borrower_id")
+    private Borrower borrower;
     @ManyToOne
     @JoinColumn(name = "book_id")
     private Book book;
@@ -56,12 +53,12 @@ public class IssuedBook{
         IssuedBookNumber = issuedBookNumber;
     }
 
-    public User getUser() {
-        return user;
+    public Borrower getBorrower() {
+        return borrower;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setBorrower(Borrower borrower) {
+        this.borrower = borrower;
     }
 
     public Book getBook() {
@@ -73,11 +70,11 @@ public class IssuedBook{
     }
     public IssuedBook() {
     }
-    public IssuedBook(int id,  int userId,Date dateOfIssue) {
+    public IssuedBook(int id,  int borrowerId,Date dateOfIssue) {
         this.book = new Book();
         book.setBookId(id);
-        this.user = new User();
-        this.user.setId(userId);
+        this.borrower = new Borrower();
+        this.borrower.setId(borrowerId);
         this.dateOfIssue = dateOfIssue;
     }
 
