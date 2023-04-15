@@ -24,7 +24,7 @@ public class AppUserDTO {
     }
 
     public boolean isEnabled() {
-        return true;
+        return isEnabled;
     }
 
     public void setEnabled(boolean enabled) {
